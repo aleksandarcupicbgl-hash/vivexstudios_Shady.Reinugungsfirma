@@ -89,7 +89,11 @@
           </div>
 
           <div class="form-card" id="form-card">
-            <form id="anfrage-form" novalidate>
+            <!-- Ohne JavaScript wird das Formular direkt an Web3Forms gesendet -->
+            <form id="anfrage-form" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="[WEB3FORMS-ACCESS-KEY]">
+              <input type="hidden" name="subject" value="Neue Anfrage über die Website">
+              <input type="hidden" name="from_name" value="Website CD Reinigungsservice">
               <div class="progress" aria-live="polite">
                 <div class="progress__top">
                   <span class="progress__label" id="progress-label">Leistung auswählen</span>
@@ -124,14 +128,14 @@
               </div>
 
               <!-- Schritt 2 -->
-              <div class="step" data-step="2" data-title="Details" hidden>
+              <div class="step" data-step="2" data-title="Details">
                 <h2 tabindex="-1">Ein paar Details</h2>
                 <p class="step__intro">Damit wir Ihnen ein passendes Angebot machen können.</p>
 
                 <fieldset>
                   <legend>Objektart</legend>
                   <div class="choices choices--3" id="choices-objekt">
-                    <label class="choice"><input type="radio" name="objektart" value="Privat"><span>Privat</span></label>
+                    <label class="choice"><input type="radio" name="objektart" value="Privat" required><span>Privat</span></label>
                     <label class="choice"><input type="radio" name="objektart" value="Gewerbe"><span>Gewerbe</span></label>
                     <label class="choice"><input type="radio" name="objektart" value="Hausverwaltung"><span>Hausverwaltung</span></label>
                   </div>
@@ -140,7 +144,7 @@
 
                 <div class="field">
                   <label for="ort">Ort / PLZ</label>
-                  <input class="input" id="ort" name="ort" type="text" autocomplete="postal-code" inputmode="text" placeholder="z. B. 12345 Musterstadt" aria-describedby="err-ort">
+                  <input class="input" id="ort" name="ort" type="text" required autocomplete="postal-code" inputmode="text" placeholder="z. B. 12345 Musterstadt" aria-describedby="err-ort">
                   <p class="error-msg" id="err-ort" role="alert"></p>
                 </div>
 
@@ -152,7 +156,7 @@
                 <fieldset>
                   <legend>Häufigkeit</legend>
                   <div class="choices choices--4" id="choices-haeufigkeit">
-                    <label class="choice"><input type="radio" name="haeufigkeit" value="Einmalig"><span>Einmalig</span></label>
+                    <label class="choice"><input type="radio" name="haeufigkeit" value="Einmalig" required><span>Einmalig</span></label>
                     <label class="choice"><input type="radio" name="haeufigkeit" value="Wöchentlich"><span>Wöchentlich</span></label>
                     <label class="choice"><input type="radio" name="haeufigkeit" value="Monatlich"><span>Monatlich</span></label>
                     <label class="choice"><input type="radio" name="haeufigkeit" value="Nach Absprache"><span>Nach Absprache</span></label>
@@ -167,18 +171,18 @@
               </div>
 
               <!-- Schritt 3 -->
-              <div class="step" data-step="3" data-title="Kontaktdaten" hidden>
+              <div class="step" data-step="3" data-title="Kontaktdaten">
                 <h2 tabindex="-1">Wie erreichen wir Sie?</h2>
                 <p class="step__intro">Wir melden uns innerhalb von 24 Stunden.</p>
 
                 <div class="field">
                   <label for="name">Name</label>
-                  <input class="input" id="name" name="name" type="text" autocomplete="name" autocapitalize="words" aria-describedby="err-name">
+                  <input class="input" id="name" name="name" type="text" required autocomplete="name" autocapitalize="words" aria-describedby="err-name">
                   <p class="error-msg" id="err-name" role="alert"></p>
                 </div>
                 <div class="field">
                   <label for="telefon">Telefon</label>
-                  <input class="input" id="telefon" name="telefon" type="tel" inputmode="tel" autocomplete="tel" placeholder="z. B. 0176 12345678" aria-describedby="err-telefon">
+                  <input class="input" id="telefon" name="telefon" type="tel" required inputmode="tel" autocomplete="tel" placeholder="z. B. 0176 12345678" aria-describedby="err-telefon">
                   <p class="error-msg" id="err-telefon" role="alert"></p>
                 </div>
                 <div class="field">
@@ -200,20 +204,20 @@
                 <!-- Honeypot gegen Spam (für Menschen unsichtbar) -->
                 <div class="hp-field" aria-hidden="true">
                   <label for="website">Website</label>
-                  <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                  <input type="text" id="website" name="botcheck" tabindex="-1" autocomplete="off">
                 </div>
 
                 <label class="checkbox">
-                  <input type="checkbox" id="datenschutz" name="datenschutz" aria-describedby="err-datenschutz">
+                  <input type="checkbox" id="datenschutz" name="datenschutz" value="Ja" required aria-describedby="err-datenschutz">
                   <span>Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden.</span>
                 </label>
                 <p class="error-msg" id="err-datenschutz" role="alert"></p>
               </div>
 
               <div class="form-nav">
-                <button type="button" class="btn btn--ghost" id="btn-back" hidden><svg aria-hidden="true"><use href="#i-arrow-left"/></svg> Zurück</button>
+                <button type="button" class="btn btn--ghost" id="btn-back"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg> Zurück</button>
                 <button type="button" class="btn btn--primary btn--lg btn--block" id="btn-next">Weiter <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-                <button type="submit" class="btn btn--primary btn--lg btn--block" id="btn-submit" hidden><svg aria-hidden="true"><use href="#i-send"/></svg> <span>Anfrage absenden</span></button>
+                <button type="submit" class="btn btn--primary btn--lg btn--block" id="btn-submit"><svg aria-hidden="true"><use href="#i-send"/></svg> <span>Anfrage absenden</span></button>
               </div>
               <div class="form-alert" id="form-alert" role="alert"></div>
             </form>

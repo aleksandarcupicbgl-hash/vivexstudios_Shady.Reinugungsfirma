@@ -323,6 +323,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .progress__steps li.is-active { color: var(--text); font-weight: 600; }
 
 .step[hidden] { display: none; }
+/* Ohne JavaScript: alle Schritte untereinander, direkt absenden */
+html:not(.js) #btn-next, html:not(.js) #btn-back, html:not(.js) .progress, html:not(.js) #summary { display: none; }
+html:not(.js) .step + .step { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
 .step h2 { font-size: clamp(1.3rem, 1.2rem + .6vw, 1.6rem); margin-bottom: .3rem; }
 .step__intro { color: var(--text-muted); margin-bottom: 1.5rem; }
 

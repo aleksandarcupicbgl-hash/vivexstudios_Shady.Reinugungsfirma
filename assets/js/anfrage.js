@@ -122,7 +122,7 @@ var ANFRAGE_CONFIG = {
     window.scrollTo({ top: Math.max(top, 0), behavior: reduced ? 'auto' : 'smooth' });
   }
 
-  function goTo(step) {
+  function goTo(step, init) {
     current = step;
     steps.forEach(function (s) { s.hidden = Number(s.getAttribute('data-step')) !== step; });
     var active = form.querySelector('.step[data-step="' + step + '"]');
@@ -139,6 +139,7 @@ var ANFRAGE_CONFIG = {
     alertBox.classList.remove('is-visible');
 
     if (step === TOTAL) renderSummary();
+    if (init) return;
 
     scrollToForm();
     var h = active.querySelector('h2');
@@ -193,6 +194,10 @@ var ANFRAGE_CONFIG = {
     }).join('') + '</dl>';
   }
 
+  // Mit JavaScript: Schritt-für-Schritt-Modus (ohne JS sind alle Schritte sichtbar)
+  form.noValidate = true;
+  goTo(1, true);
+
   /* ---------- Vorauswahl über URL (?leistung=bueroreinigung) ---------- */
   var pre = new URLSearchParams(window.location.search).get('leistung');
   if (pre) {
@@ -228,6 +233,11 @@ var ANFRAGE_CONFIG = {
     if (val('website')) { showSuccess(); return; }
 
     if (CONFIG.demo) { showSuccess(); return; }
+
+    var hiddenKey = form.querySelector('input[name="access_key"]');
+    if (CONFIG.web3formsAccessKey.indexOf('[') === 0 && hiddenKey && hiddenKey.value.indexOf('[') !== 0) {
+      CONFIG.web3formsAccessKey = hiddenKey.value;
+    }
 
     var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a>.';
     if (!CONFIG.web3formsAccessKey || CONFIG.web3formsAccessKey.indexOf('[') === 0) {

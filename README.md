@@ -17,13 +17,13 @@ python3 -m http.server 8080   # dann http://localhost:8080 öffnen
 |---|---|---|
 | `[E-MAIL]` | alle HTML-Seiten | E-Mail-Adresse der Firma |
 | `[ADRESSE]` | alle HTML-Seiten | Straße, PLZ, Ort (Pflicht fürs Impressum) |
-| `[WEB3FORMS-ACCESS-KEY]` | `assets/js/anfrage.js` (ganz oben) | Kostenloser Key von https://web3forms.com – an die Firmen-E-Mail gebunden |
+| `[WEB3FORMS-ACCESS-KEY]` | `assets/js/anfrage.js` (ganz oben) und `anfrage.html` (verstecktes Feld, für Besucher ohne JavaScript) | Kostenloser Key von https://web3forms.com – an die Firmen-E-Mail gebunden |
 | `[DOMAIN]` | `<head>` von index.html & anfrage.html | Domain ohne https://, z. B. `cd-reinigungsservice.de` |
 
 Alle auf einmal ersetzen (Beispiel):
 
 ```bash
-sed -i 's/\[E-MAIL\]/info@beispiel.de/g; s/\[ADRESSE\]/Musterstraße 1, 12345 Musterstadt/g; s/\[DOMAIN\]/beispiel.de/g' *.html
+sed -i 's/\[E-MAIL\]/info@beispiel.de/g; s/\[ADRESSE\]/Musterstraße 1, 12345 Musterstadt/g; s/\[DOMAIN\]/beispiel.de/g; s/\[WEB3FORMS-ACCESS-KEY\]/DEIN-KEY/g' *.html assets/js/anfrage.js
 ```
 
 ## Logo
@@ -37,3 +37,8 @@ Open-Graph-Bild in `assets/img/`. (Aktuell liegt dort ein Platzhalter-Monogramm 
 ## Neue Referenz ergänzen
 In `index.html` im Abschnitt „Referenzen“ einen `<li class="reveal">…</li>`-Block kopieren
 und Firmenname/Text anpassen.
+
+## Vorschau-Datei
+`python3 tools/vorschau-bauen.py` erzeugt `vorschau.html`: alle Seiten in einer Datei,
+Navigation funktioniert auch ohne JavaScript (z. B. in App-Vorschauen).
+Mit `--demo` sendet das Formular nichts und zeigt nur die Erfolgsmeldung.
