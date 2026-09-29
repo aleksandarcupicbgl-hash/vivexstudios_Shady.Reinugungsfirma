@@ -10,7 +10,8 @@
 var ANFRAGE_CONFIG = {
   web3formsAccessKey: '[WEB3FORMS-ACCESS-KEY]',
   endpoint: 'https://api.web3forms.com/submit',
-  fromName: 'Website CD Reinigungsservice'
+  fromName: 'Website CD Reinigungsservice',
+  demo: false // true = nichts senden, nur Erfolgsmeldung zeigen (für Vorschau)
 };
 
 (function () {
@@ -225,6 +226,8 @@ var ANFRAGE_CONFIG = {
 
     // Honeypot: Bots füllen das versteckte Feld aus → still "erfolgreich" beenden
     if (val('website')) { showSuccess(); return; }
+
+    if (CONFIG.demo) { showSuccess(); return; }
 
     var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a>.';
     if (!CONFIG.web3formsAccessKey || CONFIG.web3formsAccessKey.indexOf('[') === 0) {

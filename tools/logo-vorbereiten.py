@@ -89,6 +89,25 @@ def content_bbox(img, threshold=28):
     return mask.getbbox() or (0, 0, w, h)
 
 
+def emblem_bbox(img, threshold=40):
+    """Größter zusammenhängender Zeilenblock (Bildmarke ohne Schriftzug darunter)."""
+    gray = img.convert("L").point(lambda v: 255 if v > threshold else 0)
+    w, h = gray.size
+    rows = [gray.crop((0, y, w, y + 1)).getbbox() is not None for y in range(h)]
+    bands, start = [], None
+    for y, on in enumerate(rows + [False]):
+        if on and start is None:
+            start = y
+        elif not on and start is not None:
+            bands.append((start, y))
+            start = None
+    if not bands:
+        return (0, 0, w, h)
+    top, bottom = max(bands, key=lambda b: b[1] - b[0])
+    box = gray.crop((0, top, w, bottom)).getbbox()
+    return (box[0], top, box[2], bottom)
+
+
 def make_transparent(img):
     """Schwarzen Hintergrund entfernen (Alpha aus Helligkeit, Farben entmultipliziert)."""
     rgba = img.convert("RGBA")
@@ -166,16 +185,24 @@ def main():
     transparent = make_transparent(cropped)
     transparent.save(OUT / "logo-transparent.png", optimize=True)
 
-    # Header-Badge: Logo auf Schwarz, max. 192px hoch (für scharfe Darstellung auf Retina)
-    badge = Image.new("RGBA", cropped.size, BLACK + (255,))
-    badge.alpha_composite(transparent)
+    # Vollständiges Logo (Hero), auf Badge-Schwarz
+    pad = round(max(cropped.size) * 0.07)
+    full = Image.new("RGBA", (cropped.width + 2 * pad, cropped.height + 2 * pad), BLACK + (255,))
+    full.alpha_composite(transparent, (pad, pad))
+    full.thumbnail((1000, 1000), Image.LANCZOS)
+    full.convert("RGB").save(OUT / "logo-full.jpg", quality=86, optimize=True)
+
+    # Bildmarke ohne Schriftzug (Header-Badge, Favicons), max. 192px hoch für Retina
+    emblem = make_transparent(cropped.crop(emblem_bbox(cropped)))
+    badge = Image.new("RGBA", emblem.size, BLACK + (255,))
+    badge.alpha_composite(emblem)
     badge.thumbnail((576, 192), Image.LANCZOS)
     badge.convert("RGB").save(OUT / "logo.png", optimize=True)
 
-    on_black_square(transparent, 32, pad_ratio=0.06, radius_ratio=0.2).save(OUT / "favicon-32.png", optimize=True)
-    on_black_square(transparent, 192, pad_ratio=0.1, radius_ratio=0.2).save(OUT / "favicon-192.png", optimize=True)
-    on_black_square(transparent, 180, pad_ratio=0.12).convert("RGB").save(OUT / "apple-touch-icon.png", optimize=True)
-    og_image(transparent, accent).save(OUT / "og-image.png", optimize=True)
+    on_black_square(emblem, 32, pad_ratio=0.02, radius_ratio=0.2).save(OUT / "favicon-32.png", optimize=True)
+    on_black_square(emblem, 192, pad_ratio=0.05, radius_ratio=0.2).save(OUT / "favicon-192.png", optimize=True)
+    on_black_square(emblem, 180, pad_ratio=0.08).convert("RGB").save(OUT / "apple-touch-icon.png", optimize=True)
+    og_image(emblem, accent).save(OUT / "og-image.png", optimize=True)
     print("Bilder erzeugt in assets/img/.")
 
 
