@@ -32,7 +32,11 @@ sed -i 's/\[E-MAIL\]/info@beispiel.de/g; s/\[ADRESSE\]/Musterstraße 1, 12345 Mu
 
 Das Skript liest die exakte Blau-Farbe aus dem Logo, trägt sie als `--accent` in
 `assets/css/style.css` ein und erzeugt Header-Logo, freigestellte Version, Favicons und
-Open-Graph-Bild in `assets/img/`. (Aktuell liegt dort ein Platzhalter-Monogramm „CD“.)
+Open-Graph-Bild in `assets/img/`.
+
+## Hero-Foto
+`assets/img/hero-reinigung-*.jpg/.webp` (800 px und 1376 px breit). Zum Austauschen einfach
+Dateien mit gleichem Namen ersetzen.
 
 ## Neue Referenz ergänzen
 In `index.html` im Abschnitt „Referenzen“ einen `<li class="reveal">…</li>`-Block kopieren

@@ -54,6 +54,10 @@ def main():
         body = body.replace(' id="main"', "").replace(' id="top"', "")
         for rel, uri in imgs.items():
             body = body.replace(f'src="{rel}"', f'src="{uri}"')
+        # Hero-Foto: nur eine eingebettete Version statt srcset
+        body = re.sub(r'<source type="image/webp"[^>]*>\s*', "", body)
+        body = re.sub(r'<img src="assets/img/hero-reinigung-1376.jpg" srcset="[^"]*" sizes="[^"]*"',
+                      '<img src="' + data_uri("assets/img/hero-reinigung-1376.webp", "image/webp") + '"', body)
         views.append(f'<div class="view" id="{vid}">{rewrite_links(body)}</div>')
 
     js = (ROOT / "assets/js/anfrage.js").read_text(encoding="utf-8")
