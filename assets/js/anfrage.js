@@ -4,8 +4,9 @@
 
 /* ---------------------------------------------------------------------------
    KONFIGURATION – hier den Web3Forms Access Key eintragen!
-   Kostenlosen Key erhalten: https://web3forms.com → E-Mail-Adresse der Firma
+   Kostenlosen Key erhalten: https://web3forms.com → eric.darko@freenet.de
    eingeben → Key kommt per E-Mail → unten statt [WEB3FORMS-ACCESS-KEY] einfügen.
+   Die Anfragen gehen dann automatisch an eric.darko@freenet.de.
    --------------------------------------------------------------------------- */
 var ANFRAGE_CONFIG = {
   web3formsAccessKey: '[WEB3FORMS-ACCESS-KEY]',
@@ -239,7 +240,7 @@ var ANFRAGE_CONFIG = {
       CONFIG.web3formsAccessKey = hiddenKey.value;
     }
 
-    var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a>.';
+    var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a> oder schreiben Sie an <a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a>.';
     if (!CONFIG.web3formsAccessKey || CONFIG.web3formsAccessKey.indexOf('[') === 0) {
       console.warn('Web3Forms Access Key fehlt – bitte in assets/js/anfrage.js eintragen.');
       showAlert('Das Anfrageformular ist noch nicht vollständig eingerichtet. ' + fallback);

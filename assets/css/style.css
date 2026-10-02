@@ -534,3 +534,8 @@ legend { font-weight: 600; margin-bottom: .65rem; padding: 0; }
 .aside-card li svg { width: 20px; height: 20px; flex: none; color: var(--accent); margin-top: 1px; }
 .aside-card .btn { margin-top: .5rem; }
 
+
+.aside-card--contact { margin-top: 1rem; font-size: var(--fs-small); }
+.aside-card--contact p { margin-bottom: .75rem; }
+.aside-card--contact address { font-style: normal; line-height: 1.7; }
+.aside-card--contact a, .call-hint a { overflow-wrap: anywhere; }

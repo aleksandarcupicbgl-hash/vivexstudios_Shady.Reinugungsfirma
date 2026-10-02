@@ -15,15 +15,13 @@ python3 -m http.server 8080   # dann http://localhost:8080 öffnen
 
 | Platzhalter | Wo | Was eintragen |
 |---|---|---|
-| `[E-MAIL]` | alle HTML-Seiten | E-Mail-Adresse der Firma |
-| `[ADRESSE]` | alle HTML-Seiten | Straße, PLZ, Ort (Pflicht fürs Impressum) |
-| `[WEB3FORMS-ACCESS-KEY]` | `assets/js/anfrage.js` (ganz oben) und `anfrage.html` (verstecktes Feld, für Besucher ohne JavaScript) | Kostenloser Key von https://web3forms.com – an die Firmen-E-Mail gebunden |
+| `[WEB3FORMS-ACCESS-KEY]` | `assets/js/anfrage.js` (ganz oben) und `anfrage.html` (verstecktes Feld, für Besucher ohne JavaScript) | Kostenloser Key von https://web3forms.com – mit eric.darko@freenet.de anlegen |
 | `[DOMAIN]` | `<head>` von index.html & anfrage.html | Domain ohne https://, z. B. `cd-reinigungsservice.de` |
 
 Alle auf einmal ersetzen (Beispiel):
 
 ```bash
-sed -i 's/\[E-MAIL\]/info@beispiel.de/g; s/\[ADRESSE\]/Musterstraße 1, 12345 Musterstadt/g; s/\[DOMAIN\]/beispiel.de/g; s/\[WEB3FORMS-ACCESS-KEY\]/DEIN-KEY/g' *.html assets/js/anfrage.js
+sed -i 's/\[DOMAIN\]/beispiel.de/g; s/\[WEB3FORMS-ACCESS-KEY\]/DEIN-KEY/g' *.html assets/js/anfrage.js
 ```
 
 ## Logo

@@ -542,6 +542,11 @@ legend { font-weight: 600; margin-bottom: .65rem; padding: 0; }
 .aside-card .btn { margin-top: .5rem; }
 
 
+.aside-card--contact { margin-top: 1rem; font-size: var(--fs-small); }
+.aside-card--contact p { margin-bottom: .75rem; }
+.aside-card--contact address { font-style: normal; line-height: 1.7; }
+.aside-card--contact a, .call-hint a { overflow-wrap: anywhere; }
+
 .view { display: none; }
 .view:target, #start { display: block; }
 body:has(.view:target) #start:not(:target) { display: none; }
@@ -744,7 +749,7 @@ body:has(.view:target) #start:not(:target) { display: none; }
             <a class="btn btn--primary btn--lg" href="tel:+4917672883621">
               <svg aria-hidden="true"><use href="#i-phone"/></svg> 0176 72883621
             </a>
-            <a class="btn btn--soft btn--lg" href="mailto:[E-MAIL]">
+            <a class="btn btn--soft btn--lg" href="mailto:eric.darko@freenet.de">
               <svg aria-hidden="true"><use href="#i-mail"/></svg> E-Mail schreiben
             </a>
             <a class="btn btn--soft btn--lg" href="https://wa.me/4917672883621" target="_blank" rel="noopener">
@@ -761,14 +766,14 @@ body:has(.view:target) #start:not(:target) { display: none; }
       <div class="site-footer__grid">
         <div>
           <strong>CD Reinigungsservice</strong>
-          <p>Inhaber: Eric Nana Kofi Darko<br>[ADRESSE]</p>
+          <p>Inhaber: Eric Nana Kofi Darko<br>Ravensburger Ring 26<br>81243 München</p>
         </div>
         <div>
           <strong>Kontakt</strong>
           <ul>
             <li><a href="tel:+4917672883621">Tel. 0176 72883621</a></li>
             <li><a href="https://wa.me/4917672883621" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:[E-MAIL]">[E-MAIL]</a></li>
+            <li><a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a></li>
           </ul>
         </div>
         <div>
@@ -829,7 +834,7 @@ body:has(.view:target) #start:not(:target) { display: none; }
       <div class="container anfrage-layout">
         <div>
           <div class="call-hint">
-            <p>Lieber direkt sprechen? Rufen Sie uns an<span>Eric Nana Kofi Darko, Inhaber</span></p>
+            <p>Lieber direkt sprechen? Rufen Sie uns an<span>Eric Nana Kofi Darko, Inhaber · <a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a></span></p>
             <a class="btn btn--primary" href="tel:+4917672883621"><svg aria-hidden="true"><use href="#i-phone"/></svg> 0176 72883621</a>
           </div>
 
@@ -918,7 +923,7 @@ body:has(.view:target) #start:not(:target) { display: none; }
               <!-- Schritt 3 -->
               <div class="step" data-step="3" data-title="Kontaktdaten">
                 <h2 tabindex="-1">Wie erreichen wir Sie?</h2>
-                <p class="step__intro">Wir melden uns innerhalb von 24 Stunden.</p>
+                <p class="step__intro">Ihre Anfrage geht direkt per E-Mail an Inhaber Eric Darko. Wir melden uns innerhalb von 24 Stunden.</p>
 
                 <div class="field">
                   <label for="name">Name</label>
@@ -986,6 +991,15 @@ body:has(.view:target) #start:not(:target) { display: none; }
             </ul>
             <a class="btn btn--soft btn--block" href="https://wa.me/4917672883621" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg> Per WhatsApp schreiben</a>
           </div>
+          <div class="aside-card aside-card--contact">
+            <h2>Ihr Ansprechpartner</h2>
+            <p><strong>Eric Nana Kofi Darko</strong><br>Inhaber</p>
+            <address>
+              Ravensburger Ring 26<br>81243 München<br>
+              <a href="tel:+4917672883621">0176 72883621</a><br>
+              <a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a>
+            </address>
+          </div>
         </aside>
       </div>
     </section>
@@ -996,14 +1010,14 @@ body:has(.view:target) #start:not(:target) { display: none; }
       <div class="site-footer__grid">
         <div>
           <strong>CD Reinigungsservice</strong>
-          <p>Inhaber: Eric Nana Kofi Darko<br>[ADRESSE]</p>
+          <p>Inhaber: Eric Nana Kofi Darko<br>Ravensburger Ring 26<br>81243 München</p>
         </div>
         <div>
           <strong>Kontakt</strong>
           <ul>
             <li><a href="tel:+4917672883621">Tel. 0176 72883621</a></li>
             <li><a href="https://wa.me/4917672883621" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:[E-MAIL]">[E-MAIL]</a></li>
+            <li><a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a></li>
           </ul>
         </div>
       </div>
@@ -1058,14 +1072,15 @@ body:has(.view:target) #start:not(:target) { display: none; }
         <address>
           CD Reinigungsservice<br>
           Inhaber: Eric Nana Kofi Darko<br>
-          [ADRESSE]
+          Ravensburger Ring 26<br>
+          81243 München
         </address>
 
         <h2>Kontakt</h2>
         <p>
           Telefon: <a href="tel:+4917672883621">0176 72883621</a><br>
           WhatsApp: <a href="https://wa.me/4917672883621" target="_blank" rel="noopener">wa.me/4917672883621</a><br>
-          E-Mail: <a href="mailto:[E-MAIL]">[E-MAIL]</a>
+          E-Mail: <a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a>
         </p>
 
         <!-- Falls vorhanden ergänzen: Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG -->
@@ -1087,14 +1102,14 @@ body:has(.view:target) #start:not(:target) { display: none; }
       <div class="site-footer__grid">
         <div>
           <strong>CD Reinigungsservice</strong>
-          <p>Inhaber: Eric Nana Kofi Darko<br>[ADRESSE]</p>
+          <p>Inhaber: Eric Nana Kofi Darko<br>Ravensburger Ring 26<br>81243 München</p>
         </div>
         <div>
           <strong>Kontakt</strong>
           <ul>
             <li><a href="tel:+4917672883621">Tel. 0176 72883621</a></li>
             <li><a href="https://wa.me/4917672883621" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:[E-MAIL]">[E-MAIL]</a></li>
+            <li><a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a></li>
           </ul>
         </div>
       </div>
@@ -1149,8 +1164,9 @@ body:has(.view:target) #start:not(:target) { display: none; }
         <h2>1. Verantwortlicher</h2>
         <address>
           CD Reinigungsservice, Inhaber: Eric Nana Kofi Darko<br>
-          [ADRESSE]<br>
-          Telefon: <a href="tel:+4917672883621">0176 72883621</a> · E-Mail: <a href="mailto:[E-MAIL]">[E-MAIL]</a>
+          Ravensburger Ring 26<br>
+          81243 München<br>
+          Telefon: <a href="tel:+4917672883621">0176 72883621</a> · E-Mail: <a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a>
         </address>
 
         <h2>2. Aufruf der Website (Server-Logfiles)</h2>
@@ -1190,14 +1206,14 @@ body:has(.view:target) #start:not(:target) { display: none; }
       <div class="site-footer__grid">
         <div>
           <strong>CD Reinigungsservice</strong>
-          <p>Inhaber: Eric Nana Kofi Darko<br>[ADRESSE]</p>
+          <p>Inhaber: Eric Nana Kofi Darko<br>Ravensburger Ring 26<br>81243 München</p>
         </div>
         <div>
           <strong>Kontakt</strong>
           <ul>
             <li><a href="tel:+4917672883621">Tel. 0176 72883621</a></li>
             <li><a href="https://wa.me/4917672883621" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:[E-MAIL]">[E-MAIL]</a></li>
+            <li><a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a></li>
           </ul>
         </div>
       </div>
@@ -1259,8 +1275,9 @@ body:has(.view:target) #start:not(:target) { display: none; }
 
 /* ---------------------------------------------------------------------------
    KONFIGURATION – hier den Web3Forms Access Key eintragen!
-   Kostenlosen Key erhalten: https://web3forms.com → E-Mail-Adresse der Firma
+   Kostenlosen Key erhalten: https://web3forms.com → eric.darko@freenet.de
    eingeben → Key kommt per E-Mail → unten statt [WEB3FORMS-ACCESS-KEY] einfügen.
+   Die Anfragen gehen dann automatisch an eric.darko@freenet.de.
    --------------------------------------------------------------------------- */
 var ANFRAGE_CONFIG = {
   web3formsAccessKey: '[WEB3FORMS-ACCESS-KEY]',
@@ -1494,7 +1511,7 @@ var ANFRAGE_CONFIG = {
       CONFIG.web3formsAccessKey = hiddenKey.value;
     }
 
-    var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a>.';
+    var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a> oder schreiben Sie an <a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a>.';
     if (!CONFIG.web3formsAccessKey || CONFIG.web3formsAccessKey.indexOf('[') === 0) {
       console.warn('Web3Forms Access Key fehlt – bitte in assets/js/anfrage.js eintragen.');
       showAlert('Das Anfrageformular ist noch nicht vollständig eingerichtet. ' + fallback);
