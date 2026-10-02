@@ -67,7 +67,7 @@ def main():
                 'Anfrage absenden</a>\n              <div class="form-alert" id="form-alert"', 1)
             header = re.search(r'<header class="site-header">.*?</header>', body, re.S).group(0)
             footer = re.search(r'<footer class="site-footer">.*?</footer>', body, re.S).group(0)
-            success = re.search(r'<div class="success" id="success" hidden>(.*?)</div>\s*</div>\s*</div>\s*<aside', body, re.S).group(1)
+            success = re.search(r'<div class="success" id="success" hidden>(.*?)</div>\s*<!-- Wird gezeigt', body, re.S).group(1)
             sent_view = (f'<div class="view" id="gesendet">{header}<main><section class="section">'
                          f'<div class="container"><div class="form-card"><div class="success">{success}</div>'
                          f'</div></div></section></main>{footer}</div>')

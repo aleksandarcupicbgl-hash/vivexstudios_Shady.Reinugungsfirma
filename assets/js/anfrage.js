@@ -12,6 +12,8 @@ var ANFRAGE_CONFIG = {
   web3formsAccessKey: '[WEB3FORMS-ACCESS-KEY]',
   endpoint: 'https://api.web3forms.com/submit',
   fromName: 'Website CD Reinigungsservice',
+  // Solange kein Key eingetragen ist, öffnet „Absenden“ eine fertig ausgefüllte E-Mail an diese Adresse
+  recipientEmail: 'eric.darko@freenet.de',
   demo: false // true = nichts senden, nur Erfolgsmeldung zeigen (für Vorschau)
 };
 
@@ -31,6 +33,7 @@ var ANFRAGE_CONFIG = {
   var btnSubmit = document.getElementById('btn-submit');
   var alertBox = document.getElementById('form-alert');
   var success = document.getElementById('success');
+  var mailFallback = document.getElementById('mail-fallback');
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var ERR_ICON = '<svg aria-hidden="true"><use href="#i-alert"/></svg>';
@@ -240,33 +243,45 @@ var ANFRAGE_CONFIG = {
       CONFIG.web3formsAccessKey = hiddenKey.value;
     }
 
-    var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a> oder schreiben Sie an <a href="mailto:eric.darko@freenet.de">eric.darko@freenet.de</a>.';
+    var leistungen = checkedLabels('leistung');
+    var name = val('name');
+    var subject = 'Neue Anfrage: ' + leistungen.join(', ') + ' – ' + name;
+    var fields = [
+      ['Leistung(en)', leistungen.join(', ')],
+      ['Objektart', checkedValues('objektart')[0]],
+      ['Ort / PLZ', val('ort')],
+      ['Gewünschter Termin / Zeitraum', val('termin') || '–'],
+      ['Häufigkeit', checkedValues('haeufigkeit')[0]],
+      ['Nachricht', val('nachricht') || '–'],
+      ['Name', name],
+      ['Telefon', val('telefon')],
+      ['E-Mail', val('email') || '–'],
+      ['Bevorzugte Kontaktart', checkedValues('kontaktart')[0]],
+      ['Datenschutz akzeptiert', 'Ja'],
+      ['Gesendet am', new Date().toLocaleString('de-DE')]
+    ];
+
+    // Ohne Web3Forms-Key: E-Mail-Programm mit fertig ausgefüllter Anfrage öffnen
     if (!CONFIG.web3formsAccessKey || CONFIG.web3formsAccessKey.indexOf('[') === 0) {
-      console.warn('Web3Forms Access Key fehlt – bitte in assets/js/anfrage.js eintragen.');
-      showAlert('Das Anfrageformular ist noch nicht vollständig eingerichtet. ' + fallback);
+      var body = 'Neue Anfrage über die Website\n\n' + fields.map(function (f) { return f[0] + ': ' + f[1]; }).join('\n');
+      var mailto = 'mailto:' + CONFIG.recipientEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      document.getElementById('mail-again').href = mailto;
+      form.hidden = true;
+      mailFallback.hidden = false;
+      scrollToForm();
+      mailFallback.querySelector('h2').focus({ preventScroll: true });
+      window.location.href = mailto;
       return;
     }
 
-    var leistungen = checkedLabels('leistung');
-    var name = val('name');
+    var fallback = 'Bitte rufen Sie uns direkt an: <a href="tel:+4917672883621">0176 72883621</a> oder schreiben Sie an <a href="mailto:' + CONFIG.recipientEmail + '">' + CONFIG.recipientEmail + '</a>.';
     var payload = {
       access_key: CONFIG.web3formsAccessKey,
-      subject: 'Neue Anfrage: ' + leistungen.join(', ') + ' – ' + name,
+      subject: subject,
       from_name: CONFIG.fromName,
-      botcheck: '',
-      'Leistung(en)': leistungen.join(', '),
-      'Objektart': checkedValues('objektart')[0],
-      'Ort / PLZ': val('ort'),
-      'Gewünschter Termin / Zeitraum': val('termin') || '–',
-      'Häufigkeit': checkedValues('haeufigkeit')[0],
-      'Nachricht': val('nachricht') || '–',
-      'Name': name,
-      'Telefon': val('telefon'),
-      'E-Mail': val('email') || '–',
-      'Bevorzugte Kontaktart': checkedValues('kontaktart')[0],
-      'Datenschutz akzeptiert': 'Ja',
-      'Gesendet am': new Date().toLocaleString('de-DE')
+      botcheck: ''
     };
+    fields.forEach(function (f) { payload[f[0]] = f[1]; });
     if (val('email')) payload.replyto = val('email');
 
     setLoading(true);

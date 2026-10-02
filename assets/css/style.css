@@ -539,3 +539,7 @@ legend { font-weight: 600; margin-bottom: .65rem; padding: 0; }
 .aside-card--contact p { margin-bottom: .75rem; }
 .aside-card--contact address { font-style: normal; line-height: 1.7; }
 .aside-card--contact a, .call-hint a { overflow-wrap: anywhere; }
+
+.success__icon--mail { background: var(--accent-soft); color: var(--accent); }
+.success__actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: 1rem; }
+.success__actions .btn { margin-top: 0; }
