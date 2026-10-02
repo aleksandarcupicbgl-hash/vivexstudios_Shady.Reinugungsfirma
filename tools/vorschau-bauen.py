@@ -58,7 +58,23 @@ def main():
         body = re.sub(r'<source type="image/webp"[^>]*>\s*', "", body)
         body = re.sub(r'<img src="assets/img/hero-reinigung-1376.jpg" srcset="[^"]*" sizes="[^"]*"',
                       '<img src="' + data_uri("assets/img/hero-reinigung-1376.webp", "image/webp") + '"', body)
+        if page == "anfrage.html" and DEMO:
+            # Ohne JavaScript (z. B. App-Vorschau) kann das Formular nicht senden:
+            # ein Anker-Button führt dann per CSS :target zur Erfolgsmeldung.
+            body = body.replace(
+                '<div class="form-alert" id="form-alert"',
+                '<a class="btn btn--primary btn--lg btn--block preview-submit" href="#gesendet">'
+                'Anfrage absenden</a>\n              <div class="form-alert" id="form-alert"', 1)
+            header = re.search(r'<header class="site-header">.*?</header>', body, re.S).group(0)
+            footer = re.search(r'<footer class="site-footer">.*?</footer>', body, re.S).group(0)
+            success = re.search(r'<div class="success" id="success" hidden>(.*?)</div>\s*</div>\s*</div>\s*<aside', body, re.S).group(1)
+            sent_view = (f'<div class="view" id="gesendet">{header}<main><section class="section">'
+                         f'<div class="container"><div class="form-card"><div class="success">{success}</div>'
+                         f'</div></div></section></main>{footer}</div>')
         views.append(f'<div class="view" id="{vid}">{rewrite_links(body)}</div>')
+
+    if DEMO:
+        views.append(rewrite_links(sent_view))
 
     js = (ROOT / "assets/js/anfrage.js").read_text(encoding="utf-8")
     js = js.replace("document.querySelector('.site-header').offsetHeight", "document.querySelector('#anfrage .site-header').offsetHeight")
@@ -88,6 +104,9 @@ document.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('is-
 .view {{ display: none; }}
 .view:target, #start {{ display: block; }}
 body:has(.view:target) #start:not(:target) {{ display: none; }}
+.preview-submit {{ display: none; margin-top: 1.75rem; }}
+html:not(.js) .preview-submit {{ display: flex; }}
+html:not(.js) #btn-submit {{ display: none; }}
 .preview-note {{ background: var(--text); color: #fff; font-size: .875rem; text-align: center; padding: .5rem 1rem; }}
 </style>
 <script>document.documentElement.classList.add('js')</script>
