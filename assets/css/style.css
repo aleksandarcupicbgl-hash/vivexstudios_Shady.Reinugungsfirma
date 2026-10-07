@@ -600,3 +600,17 @@ legend { font-weight: 600; margin-bottom: .65rem; padding: 0; }
   .service-aside { position: sticky; top: calc(var(--header-h) + 24px); }
   .related ul { grid-template-columns: repeat(4, 1fr); }
 }
+
+/* Credit Webdesign (dezent im Footer) */
+.site-footer__credit { margin-top: .75rem; display: flex; justify-content: flex-start; }
+.site-footer__credit a {
+  display: inline-flex; align-items: center; gap: .45rem; min-height: 44px;
+  font-size: .8125rem; letter-spacing: .02em; color: var(--text-muted); text-decoration: none;
+  transition: color .2s var(--ease);
+}
+.site-footer__credit a:hover { color: var(--text); text-decoration: none; }
+.site-footer__credit img { opacity: .75; transition: opacity .2s var(--ease); }
+.site-footer__credit a:hover img { opacity: 1; }
+.site-footer__credit picture, .site-footer__credit img { display: block; height: 20px; width: auto; }
+.site-footer__credit span { font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: .75rem; }
+@media (min-width: 1024px) { .site-footer__credit { justify-content: flex-end; } }
