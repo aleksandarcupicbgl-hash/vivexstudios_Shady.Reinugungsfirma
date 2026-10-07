@@ -9,20 +9,38 @@ python3 -m http.server 8080   # dann http://localhost:8080 öffnen
 ## Seiten
 - `index.html` – Startseite
 - `anfrage.html` – Anfrageformular in 3 Schritten (Versand über Web3Forms)
-- `impressum.html`, `datenschutz.html` – Pflichtseiten (nur im Footer verlinkt)
+- `treppenhausreinigung-muenchen.html`, `bueroreinigung-muenchen.html`, `fensterreinigung-muenchen.html`,
+  `winterdienst-muenchen.html`, `grundreinigung-muenchen.html` – Leistungsseiten für lokales SEO
+- `impressum.html`, `datenschutz.html` – Pflichtseiten (im Footer verlinkt)
+- `robots.txt`, `sitemap.xml` – für Suchmaschinen (Domain: https://www.cdreinigungsservice.de)
 
 ## Platzhalter ausfüllen
 
 | Platzhalter | Wo | Was eintragen |
 |---|---|---|
 | `[WEB3FORMS-ACCESS-KEY]` | `assets/js/anfrage.js` (ganz oben) und `anfrage.html` (verstecktes Feld, für Besucher ohne JavaScript) | Kostenloser Key von https://web3forms.com – mit eric.darko@freenet.de anlegen |
-| `[DOMAIN]` | `<head>` von index.html & anfrage.html | Domain ohne https://, z. B. `cd-reinigungsservice.de` |
+| `[GOOGLE-SEARCH-CONSOLE-CODE]` | `index.html` (Meta-Tag `google-site-verification`) | In der Google Search Console „URL-Präfix“ → Methode „HTML-Tag“ wählen und nur den `content`-Wert eintragen |
 
 Alle auf einmal ersetzen (Beispiel):
 
 ```bash
-sed -i 's/\[DOMAIN\]/beispiel.de/g; s/\[WEB3FORMS-ACCESS-KEY\]/DEIN-KEY/g' *.html assets/js/anfrage.js
+sed -i 's/\[WEB3FORMS-ACCESS-KEY\]/DEIN-KEY/g' anfrage.html assets/js/anfrage.js
+sed -i 's/\[GOOGLE-SEARCH-CONSOLE-CODE\]/DEIN-CODE/' index.html
 ```
+
+## Leistungsseiten bearbeiten
+Texte, FAQ und Leistungsumfang stehen in `tools/leistungen.py`. Nach einer Änderung:
+
+```bash
+python3 tools/leistungsseiten-bauen.py
+```
+
+Header und Footer werden dabei aus `index.html` übernommen. Bei neuen Seiten auch `sitemap.xml` ergänzen.
+
+## Analytics (Plausible)
+Alle Seiten laden `https://plausible.io/js/script.js` mit `data-domain="cdreinigungsservice.de"`.
+Damit Zahlen ankommen, muss die Domain in einem Plausible-Konto (plausible.io) angelegt sein.
+Plausible setzt keine Cookies – ein Cookie-Banner ist dafür nicht nötig.
 
 ## Logo
 1. `logo.png` in den Projektordner legen.

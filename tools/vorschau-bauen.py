@@ -12,7 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DEMO = "--demo" in sys.argv
-PAGES = {"index.html": "start", "anfrage.html": "anfrage", "impressum.html": "impressum", "datenschutz.html": "datenschutz"}
+PAGES = {"index.html": "start", "anfrage.html": "anfrage", "impressum.html": "impressum", "datenschutz.html": "datenschutz",
+         **{f"{n}-muenchen.html": n for n in ["treppenhausreinigung", "bueroreinigung", "fensterreinigung", "winterdienst", "grundreinigung"]}}
 
 
 def data_uri(rel, mime):
@@ -33,7 +34,7 @@ def rewrite_links(html):
         target = "#" + (frag if frag and path == "index.html" else PAGES[path])
         return f'href="{target}"{extra}'
     html = re.sub(r'href="([^"#:][^"]*)"', repl, html)
-    return re.sub(r'(href="#(?:start|anfrage|impressum|datenschutz)"[^>]*?) target="_blank"', r"\1", html)
+    return re.sub(r'(href="#(?:' + "|".join(PAGES.values()) + r')"[^>]*?) target="_blank"', r"\1", html)
 
 
 def main():
@@ -88,7 +89,8 @@ document.addEventListener('click', function (e) {
   document.querySelectorAll('input[name="leistung"]').forEach(function (b) { b.checked = b.value === a.getAttribute('data-leistung'); });
 });
 window.addEventListener('hashchange', function () {
-  if (/^#(start|anfrage|impressum|datenschutz)$/.test(location.hash)) window.scrollTo(0, 0);
+  var v = document.getElementById(location.hash.slice(1));
+  if (v && v.classList.contains('view')) window.scrollTo(0, 0);
 });
 document.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('is-visible'); });
 """
@@ -98,6 +100,7 @@ document.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('is-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <title>CD Reinigungsservice – Vorschau</title>
 <link rel="icon" href="{data_uri('assets/img/favicon-32.png', 'image/png')}">
 <style>{css}
