@@ -606,3 +606,6 @@ legend { font-weight: 600; margin-bottom: .65rem; padding: 0; }
 .site-footer .credit a { display: inline-block; padding-block: .75rem; font-weight: 600; color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--border); }
 .site-footer .credit a:hover { color: var(--text); text-decoration-color: currentColor; }
 @media (min-width: 1024px) { .site-footer .credit { text-align: right; } }
+
+/* Klickbare Telefon-/E-Mail-Angaben im Fließtext, optisch wie der umgebende Text */
+a.link-plain, a.link-plain:hover { color: inherit; text-decoration: none; }
