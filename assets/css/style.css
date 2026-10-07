@@ -80,7 +80,7 @@ h3 { font-size: var(--fs-h3); letter-spacing: -.01em; }
 p { margin: 0 0 1em; }
 a { color: var(--accent-dark); text-underline-offset: 3px; }
 a:hover { color: var(--accent); }
-ul, ol.progress__steps { margin: 0; padding: 0; list-style: none; }
+ul, ol.progress__steps, ol.grid { margin: 0; padding: 0; list-style: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
 [hidden] { display: none !important; }
 
