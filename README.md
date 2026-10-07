@@ -12,7 +12,7 @@ python3 -m http.server 8080   # dann http://localhost:8080 öffnen
 - `treppenhausreinigung-muenchen.html`, `bueroreinigung-muenchen.html`, `fensterreinigung-muenchen.html`,
   `winterdienst-muenchen.html`, `grundreinigung-muenchen.html` – Leistungsseiten für lokales SEO
 - `impressum.html`, `datenschutz.html` – Pflichtseiten (im Footer verlinkt)
-- `robots.txt`, `sitemap.xml` – für Suchmaschinen (Domain: https://cdreinigungsservice.de)
+- `robots.txt`, `sitemap.xml` – für Suchmaschinen (Domain: https://www.cdreinigungsservice.de)
 
 ## Platzhalter ausfüllen
 

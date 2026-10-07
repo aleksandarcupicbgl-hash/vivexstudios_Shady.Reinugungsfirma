@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 from leistungen import LEISTUNGEN  # noqa: E402
 
-DOMAIN = "https://cdreinigungsservice.de"
+DOMAIN = "https://www.cdreinigungsservice.de"
 
 ARROW_LEFT = ('      <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
               'stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>\n')
@@ -53,7 +53,7 @@ def main():
                 "@type": "CleaningService",
                 "@id": f"{DOMAIN}/#business",
                 "name": "CD Reinigungsservice",
-                "telephone": "+49 176 72883621",
+                "telephone": "+4917672883621",
                 "url": f"{DOMAIN}/",
                 "address": {
                     "@type": "PostalAddress",
@@ -85,12 +85,8 @@ def main():
         umfang = "\n".join(
             f'            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>{u}</span></li>' for u in s["umfang"]
         )
-        def faq_html(a):
-            a = a.replace("0176 72883621", '<a href="tel:+4917672883621">0176 72883621</a>')
-            return a.replace("unser Anfrageformular", f'unser <a href="anfrage.html?leistung={s["slug"]}">Anfrageformular</a>')
-
         faq = "\n".join(
-            f'          <details class="faq__item">\n            <summary>{q}</summary>\n            <p>{faq_html(a)}</p>\n          </details>'
+            f'          <details class="faq__item">\n            <summary>{q}</summary>\n            <p>{a}</p>\n          </details>'
             for q, a in s["faq"]
         )
         related = "\n".join(
@@ -112,7 +108,7 @@ def main():
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="CD Reinigungsservice">
-  <meta property="og:title" content="{s['title']}">
+  <meta property="og:title" content="{s['h1']} | CD Reinigungsservice">
   <meta property="og:description" content="{s['description']}">
   <meta property="og:url" content="{url}">
   <meta property="og:image" content="{DOMAIN}/assets/img/og-image.png">
