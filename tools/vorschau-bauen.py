@@ -102,7 +102,7 @@ document.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('is-
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>CD Reinigungsservice – Vorschau</title>
-<link rel="icon" href="{data_uri('assets/img/favicon-32.png', 'image/png')}">
+<link rel="icon" href="{data_uri('favicon-32x32.png', 'image/png')}">
 <style>{css}
 .view {{ display: none; }}
 .view:target, #start {{ display: block; }}

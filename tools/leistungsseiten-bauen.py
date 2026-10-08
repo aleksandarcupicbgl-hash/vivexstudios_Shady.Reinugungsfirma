@@ -99,6 +99,7 @@ def main():
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{s['title']}</title>
   <meta name="description" content="{s['description']}">
+  <meta name="robots" content="max-image-preview:large">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="canonical" href="{url}">
 
@@ -113,9 +114,11 @@ def main():
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <link rel="preload" href="assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
