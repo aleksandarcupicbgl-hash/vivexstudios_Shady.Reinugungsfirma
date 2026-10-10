@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /vorschau.html
 
 Sitemap: https://cdreinigungsservice.de/sitemap.xml
